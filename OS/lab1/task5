@@ -1,0 +1,24 @@
+echo "Enter String: "
+read n
+for ((;ch<5;))
+do
+printf "\nMenu\n1.To lower\n2.To Upper\n3.First Word\n4.Lower to upper and upper to lower \n5.Exit\nChoice:"
+read ch
+case $ch in 
+1)
+	echo "$n" | tr [A-Z] [a-z] 
+	;;
+2)
+	 echo "$n" | tr [a-z] [A-Z]
+	;;
+3)	
+	printf "${n:0:1}" | tr [a-z] [A-Z]
+	printf "${n:1}"
+	;;
+4)	echo "$n" | tr [a-zA-Z] [A-Za-z]
+	;;
+*)
+	echo "Exit"
+	;;
+esac
+done

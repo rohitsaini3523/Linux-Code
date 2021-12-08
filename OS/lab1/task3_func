@@ -1,0 +1,13 @@
+function fact
+{
+num=$1
+i=1
+while [ $num -gt 0 ]
+do
+	i=`expr $i \* $num`
+	num=`expr $num - 1`
+done
+echo "Factorial is: $i"
+}
+
+fact 5

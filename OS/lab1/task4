@@ -1,0 +1,43 @@
+choice=1
+while [ $choice -le 4 ]
+do
+printf "Menu\n1.ADD\n2.SUB\n3.MUL\n4.DIV\n5.Exit\nChoice:"
+read choice
+case $choice in 
+1)
+	echo "A:"
+	read a
+	echo "B:"
+	read b
+	p=`expr $a + $b`
+	echo "Addition is: $p"
+	;;
+2)
+	echo "A:"
+	read a
+	echo "B:"
+	read b
+	p=`expr $a - $b`
+	echo "Subtraction is: $p"
+	;;
+3)
+	echo "A:"
+	read a
+	echo "B:"
+	read b
+	p=`expr $a \* $b`
+	echo "Multiplication is: $p"
+	;;
+4)
+	echo "A:"
+	read a
+	echo "B:"
+	read b
+	p=`expr $a / $b`
+	echo "Division is: $p"
+	;;
+*)
+	echo "Exit"
+	;;
+esac
+done

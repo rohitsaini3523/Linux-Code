@@ -1,0 +1,9 @@
+echo "Enter Number:"
+read num
+i=1
+while [ $num -gt 0 ]
+do
+	i=`expr $i \* $num`
+	num=`expr $num - 1`
+done
+echo "Factorial: $i"  
