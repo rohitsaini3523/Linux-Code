@@ -51,7 +51,7 @@ int main()
 		wait(NULL);
 		printf("\nParent Process\n");
 	for(int j=0;j<n-1;j++)
-	for(int k=0;k<n-1;k++)
+	for(int k=0;k<n-j-1;k++)
 	{
 		if(a[k]<a[k+1])
 		{
