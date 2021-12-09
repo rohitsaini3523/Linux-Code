@@ -1,10 +1,10 @@
 //============================================================================
 // Name        : LAB1.cpp
-// Author      : ROHIT
+// Author      : ROHIT Saini
 // Version     :
 // Copyright   : Your copyright notice
-// Description : Hello World in C++, Ansi-style
-//============================================================================
+// Description : Lab 1, Ansi-style
+// Erp: 1032200897	============================================================================
 
 #include <iostream>
 using namespace std;
@@ -53,7 +53,117 @@ public:
 	void inorder_r(tnode *root);
 	void preorder_r(tnode *root);
 	void postorder_r(tnode *root);
+	void inorder_nr();
+	void preorder_nr();
+	void postorder_nr();
 };
+
+class stack
+{
+	int top;
+	tnode *data[30];
+public:
+	stack()
+	{
+		top =-1;
+	}
+
+	void push(tnode *temp);
+	tnode *pop();
+	int empty();
+	friend class tree;
+}s;
+void stack::push(tnode *temp)
+{
+	top++;
+	s.data[top]=temp;
+}
+
+tnode *stack::pop()
+{
+	tnode *temp = s.data[top];
+	top--;
+	return temp;
+}
+int stack::empty()
+{
+	if(top==-1)
+	{
+		return 1;
+	}
+	else
+	{
+		return 0;
+	}
+}
+void tree::inorder_nr()
+{
+	tnode *temp =root;
+	while(1)
+	{
+		while(temp!=NULL)
+		{
+			s.push(temp);
+			temp = temp->left;
+		}
+		if(s.empty())
+		{
+			break;
+		}
+		temp = s.pop();
+		cout<<temp->data<<" ";
+		temp= temp->right;
+	}
+}
+
+void tree::preorder_nr()
+{
+	tnode *temp =root;
+		while(1)
+		{
+			while(temp!=NULL)
+			{
+				s.push(temp);
+				cout<<temp->data<<" ";
+				temp = temp->left;
+			}
+			if(s.empty())
+			{
+				break;
+			}
+			temp = s.pop();
+			temp= temp->right;
+		}
+}
+
+void tree::postorder_nr()
+{
+	tnode *temp=root;
+	while(1)
+	{
+		while(temp!=NULL)
+		{
+			s.push(temp);
+			temp=temp->left;
+		}
+		if(s.data[s.top]->right ==NULL)
+		{
+			temp= s.pop();
+			cout<<temp->data<<" ";
+		}
+		while(!s.empty() && (s.data[s.top]->right == temp ))
+		{
+			temp = s.pop();
+			cout<<temp->data<<" ";
+		}
+		if(s.empty())
+		{
+			break;
+		}
+		temp = s.data[s.top]->right;
+	}
+}
+
 void tree::create_r(tnode *root)
 {
 	tnode *curr,*temp=root;
@@ -167,9 +277,9 @@ void tree::postorder_r(tnode *temp)
 int main() {
 	tree t;
 	int choice;
-	while(choice!=6)
+	while(choice!=9)
 	{
-	cout<<"\nMENU\n1.Create.\n2.Create Recursive\n3.Inorder\n4.Preoder\n5.Postorder\n6.Exit\nChoice:";
+	cout<<"\nMENU\n1.Create.\n2.Create Recursive\n3.Inorder\n4.Preoder\n5.Postorder\n6.Inorder recursive\n7.Preorder Recursive\n8.Postorder Recursive\n9.Exit\nChoice:";
 	cin>>choice;
 	switch(choice)
 	{
@@ -184,6 +294,16 @@ int main() {
 		break;
 	case 5: t.postorder_r();
 		break;
+	case 6:
+			t.inorder_nr();
+			break;
+	case 7:
+			t.preorder_nr();
+			break;
+	case 8:
+			t.postorder_nr();
+			break;
 	}}
 	return 0;
 }
+
