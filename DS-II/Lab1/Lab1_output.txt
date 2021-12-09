@@ -1,0 +1,127 @@
+
+MENU
+1.Create.
+2.Create Recursive
+3.Inorder
+4.Preoder
+5.Postorder
+6.Inorder recursive
+7.Preorder Recursive
+8.Postorder Recursive
+9.Exit
+Choice:2
+
+Root Data: 1
+Want to add node to left(y/n): y
+Enter Left Node Data: 2
+Want to add node to left(y/n): n
+Want to add node to right(y/n): y
+Enter Right Node Data: 3
+Want to add node to left(y/n): y
+Enter Left Node Data: 4
+Want to add node to left(y/n): n
+Want to add node to right(y/n): y
+Enter Right Node Data: 5
+Want to add node to left(y/n): n
+Want to add node to right(y/n): n
+Want to add node to right(y/n): n
+Want to add node to right(y/n): y
+Enter Right Node Data: 6
+Want to add node to left(y/n): y
+Enter Left Node Data: 7
+Want to add node to left(y/n): y
+Enter Left Node Data: 8
+Want to add node to left(y/n): n
+Want to add node to right(y/n): n
+Want to add node to right(y/n): y
+Enter Right Node Data: 9
+Want to add node to left(y/n): y
+Enter Left Node Data: 10
+Want to add node to left(y/n): n
+Want to add node to right(y/n): n
+Want to add node to right(y/n): n
+Want to add node to right(y/n): n
+
+MENU
+1.Create.
+2.Create Recursive
+3.Inorder
+4.Preoder
+5.Postorder
+6.Inorder recursive
+7.Preorder Recursive
+8.Postorder Recursive
+9.Exit
+Choice:3
+2 4 5 3 1 8 7 10 9 6 
+MENU
+1.Create.
+2.Create Recursive
+3.Inorder
+4.Preoder
+5.Postorder
+6.Inorder recursive
+7.Preorder Recursive
+8.Postorder Recursive
+9.Exit
+Choice:4
+1 2 3 4 5 6 7 8 9 10 
+MENU
+1.Create.
+2.Create Recursive
+3.Inorder
+4.Preoder
+5.Postorder
+6.Inorder recursive
+7.Preorder Recursive
+8.Postorder Recursive
+9.Exit
+Choice:5
+5 4 3 2 8 10 9 7 6 1 
+MENU
+1.Create.
+2.Create Recursive
+3.Inorder
+4.Preoder
+5.Postorder
+6.Inorder recursive
+7.Preorder Recursive
+8.Postorder Recursive
+9.Exit
+Choice:6
+2 4 5 3 1 8 7 10 9 6 
+MENU
+1.Create.
+2.Create Recursive
+3.Inorder
+4.Preoder
+5.Postorder
+6.Inorder recursive
+7.Preorder Recursive
+8.Postorder Recursive
+9.Exit
+Choice:7
+1 2 3 4 5 6 7 8 9 10 
+MENU
+1.Create.
+2.Create Recursive
+3.Inorder
+4.Preoder
+5.Postorder
+6.Inorder recursive
+7.Preorder Recursive
+8.Postorder Recursive
+9.Exit
+Choice:8
+5 4 3 2 8 10 9 7 6 1 
+MENU
+1.Create.
+2.Create Recursive
+3.Inorder
+4.Preoder
+5.Postorder
+6.Inorder recursive
+7.Preorder Recursive
+8.Postorder Recursive
+9.Exit
+Choice:
