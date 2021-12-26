@@ -14,21 +14,22 @@ private:
 	string empname;
 	static int empid;
 	string addr;
-	long int contact;
+	string contact;
 	string qualification;
 	float salary;
 
 public:
 	employee()
 	{
-		empname = "";
+		empname = "-";
 		empid++;
-		addr = "";
-		contact = 0;
-		qualification = "";
+		addr = "-";
+		contact = "0";
+		qualification = "-";
 		salary = 0.0;
 	}
-	employee(string name, string address ,float s,string quali, long int number)
+	//Parametrised Constructor
+	employee(string name, string address ,float s,string quali, string number)
 	{
 		empname = name;
 		addr = address;
@@ -46,29 +47,42 @@ public:
 		contact = E.contact;
 		salary = E.salary;
 	}
-	void display();
+	~employee()
+	{
+		cout << "\nEmployee Fired with Id: " << empid << endl;
+		empid--;
+	}
+	inline void display()
+	{
+		cout << "\n++++ Employee Details +++++\n";
+		cout << "Emp Name: " << empname << endl;
+		cout << "Emp Id: " << empid << endl;
+		cout << "Emp Address: " << addr << endl;
+		cout << "Emp Contact: " << contact << endl;
+		cout << "Emp Salary: " << salary << endl;
+		cout << "Emp Qualiification: " << qualification << endl;
+
+	}
 };
 
-void employee::display()
-{
-	cout << "\nEmployee Details\n";
-	cout << "Emp Name: " << empname << endl;
-	cout << "Emp Id: " << empid << endl;
-	cout << "Emp Address: " << contact << endl;
-	cout << "Emp Salary: " << salary << endl;
-	cout << "Emp Qualiification: " << qualification << endl;
 
-}
 int employee::empid; // intialize it with 0
 
 int main()
 {
 	employee E1;
 	E1.display();
-	employee E2("Rohit","Pune",500000, "Btech", 9568000766);
+	employee E2("Rohit","Pune",500000, "Btech", "9568000766");
 	E2.display();
 	employee E3(E1);
 	E3.display();
+	employee *emp = new employee[3];
+	emp[0] = E2;
+	emp[1] = employee("Saini","Pune",500000, "Mtech", "9568000766");
+	emp[2] = E1;
+	for (int i = 0; i < 3;i++)
+		emp[i].display();
+	delete[] emp;
 	return 0;
 }
 

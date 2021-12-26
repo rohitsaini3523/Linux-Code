@@ -11,7 +11,7 @@ using namespace std;
 
 class tnode
 {
-	int data;
+	string data;
 	tnode *right;
 	tnode *left;
 	friend class tree;
