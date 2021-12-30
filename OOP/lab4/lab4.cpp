@@ -27,7 +27,7 @@ public:
         breadth = b;
         height = h;
     }
-    float getvolume(box b)
+    friend float getvolume(box b)
     {
         return (b.length * b.breadth * b.height);
     }
@@ -68,17 +68,17 @@ int main()
     cin >> b1;
     cout << "Dimension of Box 1 is :\n";
     cout << b1;
-    cout << "Volume of Box 1 is :" << b1.getvolume(b1) << endl
+    cout << "Volume of Box 1 is :" << getvolume(b1) << endl
          << "\n";
     cout << "Enter Dimensions (Length,Breadth,Heigth) : ";
     cin >> b2;
     cout << "Dimension of Box 2 is :\n";
     cout << b2;
-    cout << "Volume of Box 2 is :" << b2.getvolume(b2) << endl
+    cout << "Volume of Box 2 is :" << getvolume(b2) << endl
          << "\n";
     b3 = b1 + b2;
     cout << "Dimension of Box 3 is :\n";
     cout << b3;
-    cout << "Volume of Box 3 is :" << b3.getvolume(b3) << endl;
+    cout << "Volume of Box 3 is :" << getvolume(b3) << endl;
     return 0;
 }

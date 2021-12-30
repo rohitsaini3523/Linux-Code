@@ -29,11 +29,6 @@ public:
 	}
 	void inorder_r() //driver
 	{
-		if(root ==NULL)
-		{
-			cout << "\n Binary Search";
-		}
-		else
 		inorder_r(root);
 	}
 	tnode *copy_r()
@@ -48,9 +43,69 @@ public:
 		mirror_r(root);
 		inorder_r(root);
 	}
+	void mirror_nr();
 	void mirror_r(tnode *root);
+	/*void search_r()
+	{
+		string s;
+		int flag =0;
+		cout<<"Enter Word to Search:";
+		cin>>s;
+		flag =search_r(root,s);
+		if(flag==1)
+		{
+			cout<<"Found";
+		}
+		else
+		{
+			cout<<"Not FOound";
+		}
+	}*/
 	void delete_node();
+	void BFS();
+} b;
+
+class queue
+{
+	int front;
+	int rear;
+	tnode *data[30];
+
+public:
+	queue()
+	{
+		front = rear = -1;
+	}
+	void insert(tnode *);
+	tnode *remove();
+	int empty();
+	friend class bst;
 };
+
+void queue::insert(tnode *temp)
+{
+	rear++;
+	data[rear] = temp;
+}
+
+tnode *queue::remove()
+{
+	front++;
+	return (data[front]);
+}
+
+int queue::empty()
+{
+	if (front == rear)
+	{
+		return 1;
+	}
+	else
+	{
+		return 0;
+	}
+}
+
 void bst::inorder_r(tnode *temp)
 {
 	if (temp != NULL)
@@ -78,22 +133,20 @@ tnode *bst::copy_r(tnode *root)
 
 void bst::delete_node()
 {
-
 	int flag = 0;
-	string key;
+	string keyword;
 	tnode *temp, *parent, *curr, *s;
 	cout << "\nEnter word to be deleted:";
-	cin >> key;
+	cin >> keyword;
 	curr = root;
 	while (curr != NULL)
-	//search function to find node
 	{
-		if (curr->word == key)
+		if (curr->word == keyword)
 		{
 			flag = 1;
 			break;
 		}
-		else if (key > curr->word)
+		else if (keyword > curr->word)
 		{
 			parent = curr;
 			curr = curr->right;
@@ -103,14 +156,13 @@ void bst::delete_node()
 			parent = curr;
 			curr = curr->left;
 		}
-	} //end of while
-
-	if (flag == 1) //proceed if node found
+	}
+	if (flag == 1)
 	{
 		if (curr == root)
-		{ //deletion of root
+		{
 			if (curr->right == NULL)
-			{ // root with one child
+			{
 				root = root->left;
 			}
 			else if (curr->left == NULL)
@@ -119,119 +171,226 @@ void bst::delete_node()
 			}
 			else if (curr->right != NULL && curr->left != NULL)
 			{
-				//root with two children successor replace	
-				temp=curr->left;
-				root=curr->right;		
-				s=curr->right;			
-				while(s->left!=NULL)		
-				{			  
-					s=s->left;
-				}			
-				s->left=temp;			
+
+				temp = curr->left;
+				root = curr->right;
+				s = curr->right;
+				while (s->left != NULL)
+				{
+					s = s->left;
+				}
+				s->left = temp;
 			}
 		}
+		else if (curr != root)
+		{
+			if (curr->left == NULL && curr->right == NULL)
+			{
+				if (parent->left == curr)
+				{
+					parent->left = NULL;
+				}
+				else
+				{
+					parent->right = NULL;
+				}
+			}
+			else if (curr->left == NULL)
+			{
+				if (parent->left == curr)
+				{
+					parent->left = curr->right;
+				}
+				else
+				{
+					parent->right = curr->right;
+				}
+			}
+			else if (curr->right == NULL)
+			{
+				if (parent->left == curr)
+				{
+					parent->left = curr->left;
+				}
+
+				else
+				{
+					parent->right = curr->left;
+				}
+			}
+			else
+			{
+				s = curr->right;
+				temp = curr->left;
+				while (s->left != NULL)
+				{
+					s = s->left;
+				}
+				s->left = temp;
+				if (parent->left == curr)
+				{
+					parent->left = curr->right;
+				}
+				else
+				{
+					parent->right = curr->right;
+				}
+			}
+		}
+		curr->left = NULL;
+		curr->right = NULL;
+		delete (curr);
+	}
+	else
+	{
+		cout << "\nKeyword doesn't exist!";
+	}
+}
+void bst::BFS()
+{
+	tnode *temp, *curr;
+	queue q;
+	temp = root;
+	q.insert(temp);
+	while (!q.empty())
+	{
+		temp = q.remove();
+		cout << temp->word << "\t\t";
+		if (temp->left != NULL)
+		{
+			q.insert(temp->left);
+		}
+		if (temp->right != NULL)
+		{
+			q.insert(temp->right);
+		}
+		cout << endl;
+	}
+}
+void bst::mirror_r(tnode *root)
+{
+	tnode *temp;
+	temp = root->left;
+	root->left = root->right;
+	root->right = temp;
+	if (root->left != NULL)
+	{
+		mirror_r(root->left);
+	}
+	if (root->right != NULL)
+	{
+		mirror_r(root->right);
 	}
 }
 
-		void bst::mirror_r(tnode * root)
-		{
-			tnode *temp;
-			temp = root->left;
-			root->left = root->right;
-			root->right = temp;
-			if (root->left != NULL)
-			{
-				mirror_r(root->left);
-			}
-			if (root->right != NULL)
-			{
-				mirror_r(root->right);
-			}
-		}
-		void bst::create_nr()
-		{
-			tnode *temp, *curr;
-			int flag;
-			char choice;
-			if (root == NULL)
-			{
-				root = new tnode;
-				cout << "\nRoot Word: ";
-				cin >> root->word;
-				cout << "Root Meaning: ";
-				cin >> root->meaning;
-				root->left = NULL;
-				root->right = NULL;
-			}
-			do
-			{
-				temp = root;
-				flag = 0;
-				curr = new tnode;
-				cout << "Word: ";
-				cin >> curr->word;
-				cout << "Meaning: ";
-				cin >> curr->meaning;
-				while (flag == 0)
-				{
-					if (curr->word < temp->word)
-					{
-						if (temp->left == NULL)
-						{
-							temp->left = curr;
-							flag = 1;
-						}
-						temp = temp->left;
-					}
-					else if(curr->word > temp->word)
-					{
+void bst::mirror_nr()
+{
+	tnode *temp = root;
+	queue q;
+	q.insert(temp);
+	while (!q.empty())
+	{
+		temp = q.remove();
+		temp = root->left;
+		root->left = root->right;
+		root->right = temp;
+		if (temp->left != NULL)
+			q.insert(temp->left);
+		if (temp->right != NULL)
+			q.insert(temp->right);
+	}
+}
 
-						if (temp->right == NULL)
-						{
-							temp->right = curr;
-							flag = 1;
-						}
-						temp = temp->right;
-					}
-				}
-				cout << "Want to Add More:(y/n)";
-				cin >> choice;
-			} while (choice == 'y' || choice == 'Y');
-		}
-		int main()
+void bst::create_nr()
+{
+	tnode *temp, *curr;
+	int flag;
+	char choice;
+	if (root == NULL)
+	{
+		root = new tnode;
+		cout << "\nRoot Word: ";
+		cin >> root->word;
+		cout << "Root Meaning: ";
+		cin >> root->meaning;
+		root->left = NULL;
+		root->right = NULL;
+	}
+	do
+	{
+		temp = root;
+		flag = 0;
+		curr = new tnode;
+		cout << "Word: ";
+		cin >> curr->word;
+		cout << "Meaning: ";
+		cin >> curr->meaning;
+		while (flag == 0)
 		{
-			bst b;
-			int choice;
-			while(choice !=7)
+			if (curr->word < temp->word)
 			{
-				cout<<"\n________MENU______";
-				cout << "\n1.Create(nr)";
-				cout << "\n2.Inorder display(r) ";
-				cout << "\n3.Delete(nr)";
-				cout<<"\n4.Level wise display(nr) ";
-				cout<<"5.Mirror image(nr) ";
-				cout <<"\n6.Copy(r)";
-				cout<<"7.Exit ";
-				cout<< "\nEnter your choice:";
-				cin>>choice;
-                switch(choice)
+				if (temp->left == NULL)
 				{
-					case 1: b.create_nr();
-						break;
-					case 2:	cout << "Inorder Display: \n";
-							b.inorder_r();
-							break;
-					case 3: cout << "Copy Tree: \n";
-						    b.inorder_r(b.copy_r());
-							break;
-					case 4: cout << "Mirror Tree:\n";
-							b.mirror_r();
-							break;
-					case 5:	b.delete_node();
-						break;
+					temp->left = curr;
+					flag = 1;
 				}
-
+				else
+					temp = temp->left;
 			}
-			
-			return 0;
+			else
+			{
+
+				if (temp->right == NULL)
+				{
+					temp->right = curr;
+					flag = 1;
+				}
+				else
+					temp = temp->right;
+			}
 		}
+		cout << "Want to Add More:(y/n)";
+		cin >> choice;
+	} while (choice == 'y' || choice == 'Y');
+}
+
+int main()
+{
+	int ch;
+	while (ch != 8)
+	{
+		cout << "\n\tMenu\n";
+		cout << "\n1.Create\n2.Inorder Display\n3.Delete\n4.Level Wise Display\n5.Mirror(r)\n6.Copy(r)\n7.Mirror(nr)\n8.Exit\nChoice:";
+		cin >> ch;
+		switch (ch)
+		{
+		case 1:
+			b.create_nr();
+			break;
+		case 2:
+			cout << "Inorder Display: \n";
+			b.inorder_r();
+			break;
+		case 3:
+			b.delete_node();
+			break;
+		case 4:
+			b.BFS();
+			break;
+		case 5:
+			cout << "Mirror Tree:\n";
+			b.mirror_r();
+			break;
+		case 6:
+			cout << "Copy Tree: \n";
+			b.inorder_r(b.copy_r());
+			break;
+		case 7:
+			cout << "Mirror Using Non Recursive Method:";
+			b.mirror_nr();
+			b.BFS();
+			break;
+		}
+	}
+	return 0;
+}
