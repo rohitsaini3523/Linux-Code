@@ -1,3 +1,4 @@
+// To Execute Code write in terminal:  gcc filename -o filename.o -lpthread
 #include<stdio.h>
 #include<pthread.h>
 

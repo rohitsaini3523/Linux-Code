@@ -28,11 +28,10 @@ section .data
 section .bss
 	v_gdt resb 6
 	v_msw resb 4
-	temp resb 1
 	value resb 4
 	v_idt resb 6
-	v_ldt resw 1
-	v_tr resb 2
+	v_ldt resw 4
+	v_tr resb 4
 section .text
 
 global _start
@@ -45,35 +44,33 @@ _start:
 
 protected:
 string 1,1,msg,msgLen
+string 1,1,newline,1
+string 1,1,msg5,msg5Len
+mov bx,[v_msw]
+call printing
+SGDT [v_gdt]
+string 1,1,newline,1
 string 1,1,msg1,msg1Len
-SGDT[v_gdt]
-sldt[v_ldt]
-sidt[v_idt]
-str[v_tr]
-
 mov bx, word[v_gdt]
 call printing
-
 mov bx, word[v_gdt+2]
 call printing
-
 mov bx, word[v_gdt+4]
 call printing
 
 string 1,1,newline,1
 string 1,1,msg4,msg4Len
+str[v_tr]
 mov bx,[v_tr]
 call printing
 string 1,1,newline,1
 string 1,1,msg2,msg2Len
+sldt[v_ldt]
 mov bx,[v_ldt]
 call printing
 string 1,1,newline,1
-string 1,1,msg5,msg5Len
-mov bx,[v_msw]
-call printing
-string 1,1,newline,1
 string 1,1,msg3,msg3Len
+sidt[v_idt]
 mov bx,[v_idt]
 call printing
 
@@ -90,7 +87,7 @@ syscall
 
 printing:
 mov rdi,value
-mov byte[cnt2],4H
+mov bp,4
 up:
 rol bx,04
 mov cl,bl
@@ -100,9 +97,9 @@ jbe next
 add cl,07H
 next:
 add cl, 30H
-mov byte[rdi], cl
+mov [rdi], cl
 inc rdi
-dec byte[cnt2]
+dec bp
 jnz up
 string 1,1,value,4
 ret

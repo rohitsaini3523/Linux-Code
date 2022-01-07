@@ -19,6 +19,7 @@ private:
 	float salary;
 
 public:
+	//default constructor
 	employee()
 	{
 		empname = "-";
@@ -74,12 +75,12 @@ int main()
 	E1.display();
 	employee E2("Rohit","Pune",500000, "Btech", "9568000766");
 	E2.display();
-	employee E3(E1);
+	employee E3(E1);	//copy constructor
 	E3.display();
 	employee *emp = new employee[3];
-	emp[0] = E2;
-	emp[1] = employee("Saini","Pune",500000, "Mtech", "9568000766");
-	emp[2] = E1;
+	emp[0] = E2;	//copy constructor
+	emp[1] = employee("Saini","Pune",500000, "Mtech", "9568000766"); //Parameterized constructor
+	emp[2] = E1;	//copy constructor
 	for (int i = 0; i < 3;i++)
 		emp[i].display();
 	delete[] emp;

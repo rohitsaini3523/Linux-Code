@@ -258,13 +258,16 @@ void bst::BFS()
 		cout << temp->word << "\t\t";
 		if (temp->left != NULL)
 		{
+			cout << "\t";
 			q.insert(temp->left);
 		}
-		if (temp->right != NULL)
+		else if (temp->right != NULL)
 		{
+			cout << "\t";
 			q.insert(temp->right);
 		}
-		cout << endl;
+		else
+			cout << endl;
 	}
 }
 void bst::mirror_r(tnode *root)
