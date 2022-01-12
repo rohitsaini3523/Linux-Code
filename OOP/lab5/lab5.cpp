@@ -1,4 +1,4 @@
-/* Aim: Lab 5
+/* Aim: Demonstration of Pure virtual function
  Author: Rohit Saini
  Roll no: 6
  Panel: A1
@@ -39,7 +39,7 @@ void employee::accept()
 	cout << "\nEmployee Details\n";
 	cout << "Enter Name:";
 	cin >> emp_name;
-	cout << "\nEnter Employee Id:";
+	cout << "Enter Employee Id:";
 	cin >> emp_id;
 	cin.ignore();
 	cout << "Enter Address:";
@@ -133,28 +133,41 @@ public:
 int main()
 {
     cout << "**Demonstration of Pure virtual Function**" << endl;
-    employee *emp;
-    cout << "Employee Postion: class1_EMP " << endl;
-
-    class1_EMP c1;
-    c1.accept();
-    emp = &c1;
-    emp->claculate_salary();
-    c1.display_gross();
-
-    cout << "\n\nEmployee Postion: class2_EMP " << endl;
-    class2_EMP c2;
-    c2.accept();
-    emp = &c2;
-    emp->claculate_salary();
-    c2.display_gross();
-
-    cout << "\n\nEmployee Postion: class3_EMP " << endl;
-    class3_EMP c3;
-    c3.accept();
-    emp = &c3;
-    emp->claculate_salary();
-    c3.display_gross();
+    employee *emp[10];
+	int k;
+	cout << "Enter Number of Employee in Class1_EMP: ";
+	cin >> k;
+	for (int i = 0; i < k;i++)
+	{
+		cout << "Employee Postion: class1_EMP " << endl;
+		class1_EMP c1;
+		c1.accept();
+		emp[i] = &c1;
+		emp[i]->claculate_salary();
+		c1.display_gross();
+	}
+	cout << "Enter Number of Employee in Class2_EMP: ";
+	cin >> k;
+	for (int i = 0; i < k;i++)
+	{
+		cout << "\n\nEmployee Postion: class2_EMP " << endl;
+		class2_EMP c2;
+		c2.accept();
+		emp[i] = &c2;
+		emp[i]->claculate_salary();
+		c2.display_gross();
+	}
+	cout << "Enter Number of Employee in Class3_EMP: ";
+	cin >> k;
+	for (int i = 0; i < k;i++)
+	{
+		cout << "\n\nEmployee Postion: class3_EMP " << endl;
+		class3_EMP c3;
+		c3.accept();
+		emp[i] = &c3;
+		emp[i]->claculate_salary();
+		c3.display_gross();
+	}
     cout << "\nDemonstration End!" << endl;
     return 0;
 }

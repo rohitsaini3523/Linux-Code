@@ -7,7 +7,7 @@
 %endmacro
 
 section .data
-    array db 1,2,3,4,5
+    array db 11,12,13,14,15
     msg1 db "Sum: ",10
     msg1len equ $-msg1
     counter db 5
