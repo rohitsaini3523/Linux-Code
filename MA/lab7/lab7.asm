@@ -1,7 +1,7 @@
 ; JBE : jump if below/equal
-;Jg: jump if Greater
-;CMP: used to compare 2 provided byte/word
-;XCHG: used to exchange the data from two location
+; Jg: jump if Greater
+; CMP: used to compare 2 provided byte/word
+; XCHG: used to exchange the data from two location
 %macro str32 4
 	mov rax,%1
 	mov rdi,%2

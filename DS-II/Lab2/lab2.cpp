@@ -69,7 +69,7 @@ class queue
 {
 	int front;
 	int rear;
-	tnode *data[30];
+	tnode *data[100];
 
 public:
 	queue()
@@ -90,8 +90,12 @@ void queue::insert(tnode *temp)
 
 tnode *queue::remove()
 {
-	front++;
-	return (data[front]);
+	if(!empty())
+	{
+		front++;
+		return (data[front]);
+	}
+	return NULL;
 }
 
 int queue::empty()
@@ -248,26 +252,25 @@ void bst::delete_node()
 }
 void bst::BFS()
 {
-	tnode *temp, *curr;
 	queue q;
-	temp = root;
+	tnode *temp = root;
 	q.insert(temp);
 	while (!q.empty())
 	{
 		temp = q.remove();
-		cout << temp->word << "\t\t";
+		cout << temp->word << "\t";
 		if (temp->left != NULL)
 		{
 			cout << "\t";
 			q.insert(temp->left);
 		}
-		else if (temp->right != NULL)
+		cout << endl;
+		if (temp->right != NULL)
 		{
 			cout << "\t";
 			q.insert(temp->right);
 		}
-		else
-			cout << endl;
+		cout << endl;
 	}
 }
 void bst::mirror_r(tnode *root)
