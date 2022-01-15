@@ -8,28 +8,23 @@ struct process
 	float wait;
 	float turnaround;
 	float ctime;
+	float q;
 };
-void Chart(struct process p[], int n)
-{
-	for (int i = 0; i < n; i++)
-	{
-		printf("P%d\t",p[i].a);
 
-	}
-}
 void waiting_time(struct process p[],int n)
 {
-	p[0].wait =0;
-	
+	float k = 0;
+	p[0].wait = p[0].arrival_time;
+	p[0].q=0;
 	for(int i=1;i<n;i++)
 	{
-	float q=0;
-		p[i].wait=0;
-		for(int j=0;j<i;j++)
-		q+=p[j].burst_time;
-	p[i].wait = q - p[i].arrival_time;
+		p[i].q = p[i - 1].q + p[i - 1].burst_time;
+		if(p[i].q < p[i].arrival_time)
+			k = p[i].arrival_time - p[i].q;
+		p[i].wait = p[i].q - p[i].arrival_time + k;
+		if(p[i].wait<0)
+			p[i].wait = 0;
 	}
-		
 }
 
 void turnaround_time(struct process p[],int n)
@@ -51,7 +46,6 @@ void bubblesort(struct process s[],int n)
     {
         if (s[i].arrival_time>s[i+1].arrival_time)
         {
-            //shifting whole sturcture elements to other 
             temp = s[i];
             s[i] = s[i + 1];
             s[i + 1] = temp;
@@ -88,11 +82,20 @@ void avgtime(struct process p[],int n)
 
 void display(struct process p[],int n)
 {
-	printf("\nProcess\tBurst Time\tArrival Time\tWaiting\t\tTurn Around\tCompletion Time");
+	printf("%.0f", p[0].arrival_time);
+	for (int i = 0; i < n; i++)
+	{
+		if(p[i].arrival_time>p[i].q)
+		{
+			printf(" IDLE -> %.0f",p[i].arrival_time);
+		}
+		printf("  <- P%d -> %.0f",p[i].a,p[i].ctime);
+	}
+	printf("\nProcess\tBurst Time\tArrival Time\tWaiting\t\tTurn Around\tCompletion Time\n");
 	int i=0;
 	while(i<n)
 	{
-		printf("\nP%d\t%f\t%f\t%f\t%f\t%f\n",p[i].a,p[i].burst_time,p[i].arrival_time,p[i].wait,p[i].turnaround,p[i].ctime);
+		printf("P%d\t%f\t%f\t%f\t%f\t%f\n",p[i].a,p[i].burst_time,p[i].arrival_time,p[i].wait,p[i].turnaround,p[i].ctime);
 	i++;
 	}
 }
@@ -106,8 +109,9 @@ int main()
 	struct process p[n];
 	for(int i=0;i<n;i++)
 	{
-		p[i].a = i;
-		printf("For Process: %d\n",i);
+		printf("Enter Process Id(only number): P");
+		scanf("%d", &p[i].a);
+		printf("For Process: P%d\n",p[i].a);
 		printf("Brust time:");
 		scanf("%f",&p[i].burst_time);
 		printf("Arrival time:");
@@ -119,7 +123,6 @@ int main()
 	completiontime(p,n);
 	display(p,n);
 	avgtime(p,n);
-	Chart(p, n);
 	return 0;
 }
 	

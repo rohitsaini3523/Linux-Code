@@ -15,7 +15,6 @@ void waiting_time(struct process p[], int n)
 {
     for (int i = 0; i < n; i++)
         p[i].remain_time = p[i].burst_time;
-
     int i = 0, t = 0, minm = 1000;
     int s = 0, f;
     int check = 0;
@@ -29,6 +28,7 @@ void waiting_time(struct process p[], int n)
                 s = j;
                 check = 1;
             }
+
         }
 
         if (check == 0)
