@@ -1,9 +1,3 @@
-/*
-Name: Rushikesh Patade
-Roll no.: PG-19
-Batch: G2
-*/
-
 #include<iostream>
 using namespace std;
 
@@ -379,37 +373,3 @@ int main()
 	} while( true );
     return 0;
 }
-
-// Input
-
-/*
-4
-1
-y
-2
-n
-2
-n
-0
-y
-3
-n
-3
-n
-*/
-
-/*
-4
-water
-air
-fire
-earth
-1
-n
-2
-n
-3
-n
-1
-n
-*/

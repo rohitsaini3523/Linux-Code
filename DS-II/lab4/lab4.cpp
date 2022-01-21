@@ -9,6 +9,75 @@
 #include <iostream>
 using namespace std;
 
+class stack
+{
+    int top;
+    int data[100];
+    public:
+    stack()
+    {
+        top = -1;
+    }
+    void push(int);
+    int pop();
+    bool empty();
+};
+void stack::push(int temp)
+{
+    data[++top] = temp;
+}
+int stack::pop()
+{
+    return data[top--];
+}
+bool stack::empty()
+{
+    if(top==-1)
+        return true;
+    return false;
+}
+
+class queue
+{
+	int front, rear;
+	int data[30];
+
+public:
+	queue();
+	void insert(int v);
+	int remove();
+	int empty();
+	friend class tree;
+};
+
+queue::queue()
+{
+	front = rear = -1;
+}
+
+void queue::insert(int v)
+{
+	rear++;
+	data[rear] = v;
+}
+
+int queue::remove()
+{
+	front++;
+	return (data[front]);
+}
+
+int queue::empty()
+{
+	if (front == rear)
+	{
+		return 1;
+	}
+	else
+	{
+		return 0;
+	}
+}
 class Gnode
 {
     int vertex;
@@ -78,9 +147,70 @@ class Graph
             
         }
     }
+    void DFS_nr(int v)
+    {
+        stack s;
+        Gnode *temp;
+        for (int i = 0; i < n; i++)
+            visited[i] = 0;
+        s.push(v);
+        visited[v] = 1;
+        int w;
+        do
+        {
+            v = s.pop();
+            visited[v] = 1;
+            temp = head[v];
+            cout << " -> " << v << " - " << temp->name ;
+            while(temp!=nullptr)
+            {
+                w = temp->vertex;
+                if(!visited[w])
+                {
+                    s.push(w);
+                    visited[w] = 1;
+                }
+                temp = temp->next;
+            }
+
+        } while (!s.empty());   
+    }
     void BFS()
     {
-        
+        int v;
+        cout << "Enter node to start the BFS From: ";
+        cin >> v;
+        cout << "BFS is: " << endl
+             << v << " - " << head[v]->name;
+        BFS(v);
+        cout << endl;
+    }
+    void BFS(int v)
+    {
+        Gnode *temp;
+        int w;
+        for (int i = 0; i < n; i++)
+            visited[i] = 0;
+        queue q;
+        q.insert(v);
+        while(!q.empty())
+        {
+            v = q.remove();
+            visited[v] = 1;
+            temp = head[v]->next;
+            while(temp!=nullptr)
+            {
+                w = temp->vertex;
+                if(!visited[w])
+                {
+                    cout << " ->" << w << " - "<< temp->name ;
+                    q.insert(w);
+                    visited[w] = 1;
+                }
+                temp = temp->next;
+            }
+            
+        }
     }
     void DFS()
     {
@@ -89,12 +219,12 @@ class Graph
         {
             visited[i] = 0;
         }
-            cout << "Starting Vertex: ";
-            cin >> v;
-            cout << "DFS is : " << v <<" - " << head[v]->name;
-            visited[v] = 1;
-            DFS(v);
-    }
+        cout << "Starting Vertex: ";
+        cin >> v;
+        cout << "DFS is : " << v <<" - " << head[v]->name;
+        visited[v] = 1;
+        DFS(v);
+    }    
     void DFS(int v)
     {
         Gnode *temp;
@@ -117,7 +247,7 @@ class Graph
         for( int i = 0; i < n; i++)
         {
             temp = head[i]->next;
-            cout << "Head \"" << i << " " << head[i]->name << "  -> ";
+            cout << "Head " << i << " " << head[i]->name << "  -> ";
             while ( temp != nullptr )
             {
                 cout << temp->vertex << " " << temp->name << "  -> ";
@@ -127,12 +257,39 @@ class Graph
         }
     }
 };
+
+
 int main() 
 {
     Graph g;
-    g.create();
-    g.Show();
-    g.DFS();
-
+    int ch;
+    int v;
+    do
+    {
+        cout << "\n\tMenu\n1.Create\n2.Display\n3.DFS[r]\n4.DFS[nr]\n5.BFS\n6.Exit\nChoice:";
+        cin >> ch;
+        switch (ch)
+        {
+        case 1:
+            g.create();
+            break;
+        case 2:
+            g.Show();
+            break;
+        case 3:
+            g.DFS();
+            break;
+        case 4:
+            cout << "Starting Vertex: ";
+            cin >> v;
+            g.DFS_nr(v);
+            break;
+        case 5:
+            g.BFS();
+            break;
+        default:
+            break;
+        }
+    } while (ch != 6);
     return 0;
 }

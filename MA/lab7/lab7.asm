@@ -1,7 +1,7 @@
 ; JBE : jump if below/equal
 ; Jg: jump if Greater
 ; CMP: used to compare 2 provided byte/word
-; XCHG: used to exchange the data from two location
+; XCHG: used to exchange the data/content from two memory location
 %macro str32 4
 	mov rax,%1
 	mov rdi,%2
@@ -82,16 +82,16 @@ str32 1,1,newline,1
         mov byte[counter1],4
         mov rsi,array 
 
-asc1:
+dsc:
     mov al, byte[rsi]
     cmp al,byte[rsi+1]
-    jg  incre1
+    jg  decre
     xchg al,byte[rsi+1]
     mov byte[rsi],al
-incre1:
+decre:
     inc rsi
     dec byte[counter1]
-    jnz asc1
+    jnz dsc
     dec byte[counter]
     jnz L11
 

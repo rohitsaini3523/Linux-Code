@@ -1,3 +1,9 @@
+/* Aim: C++ Program with file and exceptions handling
+ Author: Rohit Saini
+ Roll no: 6
+ Panel: A1
+ erp: 1032200897 
+*/
 #include <iostream>
 #include<iomanip>
 #include<fstream>
@@ -137,7 +143,7 @@ class admin: public marksheet
                 break;
             }
         }
-        if(flag=0)
+        if(flag==0)
         {
             cout << "\n\nPRN not found ";
         }
@@ -191,19 +197,55 @@ class admin: public marksheet
         else
             cout << "\n\nNo match Found" << endl;
     }
+    void deleterecord()
+    {
+        marksheet i;
+        long int num;
+        int flag = 0;
+        ifstream file;
+        cout << "\n\nEnter the PRN you want to delete: ";
+        cin >> num;
+        file.open("Data.txt");
+        fstream file1;
+        file1.open("Temp.txt", ios::app);
+        file.seekg(0, ios::beg);
+        while(file.read((char*)&i,sizeof(i)))
+        {
+            if(i.getPRN()!=num)
+            {
+                file1.write((char *)&i, sizeof(i));
+            }
+            else
+            {
+                flag = 1;
+            }
+        }
+        if(flag==0)
+        {
+            cout << "\nPRN not Found";
+        }
+        else
+        {
+            cout << "\n\nRecord Deleted!";
+        }
+        file1.close();
+        file.close();
+        remove("Data.txt");
+        rename("Temp.txt", "Data.txt");
+    }
     void display()
     {
         marksheet i;
         fstream fin;
         fin.open("Data.txt", ios::in | ios::out | ios::ate | ios::binary);
         fin.seekg(0, ios::beg);
-        cout << "\n\n";
-        cout << "|" << setw(13) << "PRN" << " |" << setw(13) << "Name" << " |" << setw(13) << "Physics" << " |" << setw(13) << "Chemistry" << " |" << setw(13) << "Maths" << " |" << setw(13) << "total" << " |" << setw(13) << "grade\n";
+        cout << "\n";
+        cout << "|" << setw(13) << "PRN" << " |" << setw(13) << "Name" << " |" << setw(13) << "Physics" << " |" << setw(13) << "Chemistry" << " |" << setw(13) << "Maths" << " |" << setw(13) << "total" << " |" << setw(13) << "grade\n\n";
         while(fin.read((char*)&i,sizeof(i)))
         {
             i.displayRecord();
         }
-        cout << "\n\n";
+        cout << "\n";
         fin.close();
     }
 };
@@ -217,6 +259,10 @@ int main()
         cout << "\n\n=====Menu======\n";
         cout << "1. Put Marks\n";
         cout << "2. Display all Records\n";
+        cout << "3. Search a Record\n";
+        cout << "4. Update a Record\n";
+        cout << "5. Delete a Record\n";
+        cout << "6. Exit\n";
         cout << "Choice: ";
         cin >> ch;
         switch (ch)
@@ -228,8 +274,20 @@ int main()
             a.display();
             break;
         case 3:
+            a.search();
+            break;
+            
+        case 4:
             a.modify();
             break;
+            
+        case 5:
+            a.deleterecord();
+            break;
+            
+        case 6:
+            break;
+            
         default:
             break;
         }
