@@ -13,7 +13,8 @@ class stack
 {
     int top;
     int data[100];
-    public:
+
+public:
     stack()
     {
         top = -1;
@@ -32,51 +33,51 @@ int stack::pop()
 }
 bool stack::empty()
 {
-    if(top==-1)
+    if (top == -1)
         return true;
     return false;
 }
 
 class queue
 {
-	int front, rear;
-	int data[30];
+    int front, rear;
+    int data[30];
 
 public:
-	queue();
-	void insert(int v);
-	int remove();
-	int empty();
-	friend class tree;
+    queue();
+    void insert(int v);
+    int remove();
+    int empty();
+    friend class tree;
 };
 
 queue::queue()
 {
-	front = rear = -1;
+    front = rear = -1;
 }
 
 void queue::insert(int v)
 {
-	rear++;
-	data[rear] = v;
+    rear++;
+    data[rear] = v;
 }
 
 int queue::remove()
 {
-	front++;
-	return (data[front]);
+    front++;
+    return (data[front]);
 }
 
 int queue::empty()
 {
-	if (front == rear)
-	{
-		return 1;
-	}
-	else
-	{
-		return 0;
-	}
+    if (front == rear)
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
 }
 class Gnode
 {
@@ -84,6 +85,7 @@ class Gnode
     Gnode *next;
     string name;
     friend class Graph;
+
 public:
     Gnode()
     {
@@ -97,17 +99,18 @@ public:
 };
 class Graph
 {
-    private:
-        Gnode **head;
-        int *visited;
-        int n;
-    public:
+private:
+    Gnode **head;
+    int *visited;
+    int n;
+
+public:
     Graph()
     {
         string s;
         cout << "Enter Number of Vertices: ";
         cin >> n;
-        head = new Gnode*[n];
+        head = new Gnode *[n];
         visited = new int[n];
 
         for (int i = 0; i < n; i++)
@@ -130,7 +133,7 @@ class Graph
             {
                 cout << "Enter Adjacent Vertex of " << i << ": ";
                 cin >> v;
-                if(v==i)
+                if (v == i)
                 {
                     cout << "Self Loop Not Allowed!";
                 }
@@ -143,8 +146,7 @@ class Graph
                 }
                 cout << "Choice(y/n): ";
                 cin >> choice;
-            } while (choice =='Y'||choice =='y');
-            
+            } while (choice == 'Y' || choice == 'y');
         }
     }
     void DFS_nr(int v)
@@ -161,11 +163,11 @@ class Graph
             v = s.pop();
             visited[v] = 1;
             temp = head[v];
-            cout << " -> " << v << " - " << temp->name ;
-            while(temp!=nullptr)
+            cout << " -> " << v << " - " << temp->name;
+            while (temp != nullptr)
             {
                 w = temp->vertex;
-                if(!visited[w])
+                if (!visited[w])
                 {
                     s.push(w);
                     visited[w] = 1;
@@ -173,7 +175,7 @@ class Graph
                 temp = temp->next;
             }
 
-        } while (!s.empty());   
+        } while (!s.empty());
     }
     void BFS()
     {
@@ -193,23 +195,22 @@ class Graph
             visited[i] = 0;
         queue q;
         q.insert(v);
-        while(!q.empty())
+        while (!q.empty())
         {
             v = q.remove();
             visited[v] = 1;
             temp = head[v]->next;
-            while(temp!=nullptr)
+            while (temp != nullptr)
             {
                 w = temp->vertex;
-                if(!visited[w])
+                if (!visited[w])
                 {
-                    cout << " ->" << w << " - "<< temp->name ;
+                    cout << " ->" << w << " - " << temp->name;
                     q.insert(w);
                     visited[w] = 1;
                 }
                 temp = temp->next;
             }
-            
         }
     }
     void DFS()
@@ -221,34 +222,34 @@ class Graph
         }
         cout << "Starting Vertex: ";
         cin >> v;
-        cout << "DFS is : " << v <<" - " << head[v]->name;
+        cout << "DFS is : " << v << " - " << head[v]->name;
         visited[v] = 1;
         DFS(v);
-    }    
+    }
     void DFS(int v)
     {
         Gnode *temp;
         int w;
-        if(!visited[v])
-        cout << " -> " << v << " - " << head[v]->name ;
+        if (!visited[v])
+            cout << " -> " << v << " - " << head[v]->name;
         visited[v] = 1;
         temp = head[v]->next;
-            while(temp!=nullptr)
-            {
-                w = temp->vertex;
-                if(!visited[w])
-                    DFS(w);
-                temp = temp->next;
-            }
+        while (temp != nullptr)
+        {
+            w = temp->vertex;
+            if (!visited[w])
+                DFS(w);
+            temp = temp->next;
+        }
     }
     void Show()
     {
         Gnode *temp;
-        for( int i = 0; i < n; i++)
+        for (int i = 0; i < n; i++)
         {
             temp = head[i]->next;
             cout << "Head " << i << " " << head[i]->name << "  -> ";
-            while ( temp != nullptr )
+            while (temp != nullptr)
             {
                 cout << temp->vertex << " " << temp->name << "  -> ";
                 temp = temp->next;
@@ -258,8 +259,7 @@ class Graph
     }
 };
 
-
-int main() 
+int main()
 {
     Graph g;
     int ch;

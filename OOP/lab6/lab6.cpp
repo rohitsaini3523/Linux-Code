@@ -233,6 +233,34 @@ class admin: public marksheet
         remove("Data.txt");
         rename("Temp.txt", "Data.txt");
     }
+     void sortrecord()
+    {
+        marksheet i;
+        long int num;
+        int flag = 0;
+        ifstream file;
+        cout << "\n\nEnter the PRN you want to delete: ";
+        cin >> num;
+        file.open("Data.txt");
+        fstream file1;
+        file1.open("Temp.txt", ios::app);
+        file.seekg(0, ios::beg);
+        int i1 = 0;
+        while(file.read((char*)&i,sizeof(i)))
+        {
+            file.seekg(i1*sizeof(i), ios::beg);
+            while(file1.read((char*)&i,sizeof(i)))
+            {
+                //bubble sort;
+            }
+            i1++;
+        }
+        
+        file1.close();
+        file.close();
+        remove("Data.txt");
+        rename("Temp.txt", "Data.txt");
+    }
     void display()
     {
         marksheet i;
@@ -284,10 +312,7 @@ int main()
         case 5:
             a.deleterecord();
             break;
-            
-        case 6:
-            break;
-            
+
         default:
             break;
         }
