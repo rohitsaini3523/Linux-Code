@@ -234,10 +234,10 @@ public:
             cout << " -> " << v << " - " << head[v]->name;
         visited[v] = 1;
         temp = head[v]->next;
-        while (temp != nullptr)
+        while (temp != nullptr) // vertex
         {
             w = temp->vertex;
-            if (!visited[w])
+            if (!visited[w]) // edge 
                 DFS(w);
             temp = temp->next;
         }

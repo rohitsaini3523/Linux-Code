@@ -2,6 +2,7 @@
 using namespace std;
 class Heap
 {
+    
     int marks[20] = {0};
 public:
     void accept(int n);
