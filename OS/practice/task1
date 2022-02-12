@@ -1,0 +1,8 @@
+echo "Enter Number: "
+read num
+if [ $num -gt 0 ]
+then 
+echo " +ve Number"
+else
+echo "-ve Number"
+fi

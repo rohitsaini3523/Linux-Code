@@ -1,13 +1,13 @@
-/* Panel : A1 */
-//Rollno: 6
-//erp: 1032200897
-/*
-direct access file using hashing(linear probing and without)
-1.create
-2.display
-3.add
-4.search
-5.modify
+/*  Name: Rohit Saini
+    Panel : A1
+    Rollno: 6
+    erp: 1032200897
+    direct access file using hashing(linear probing and without)
+    1.create
+    2.display
+    3.add
+    4.search
+    5.modify
 */
 #include <iostream>
 #include <fstream>
@@ -175,7 +175,8 @@ void hashing::search_hashTable()
     cin >> n;
     students s2;
     ifstream file("Data1.txt", ios::in | ios::binary);
-    file.seekg(0, ios::beg);
+    int position1 = n % 10;
+    file.seekg(position1*sizeof(s2), ios::beg);
     while (file.read((char *)&s2, sizeof(s2)))
     {
         flag = 0;
@@ -205,7 +206,8 @@ void hashing::deleteElement_hashTable()
     students s2;
     ifstream file("Data1.txt", ios::in | ios::binary);
     fstream file1("Temp.txt", ios::in | ios::out | ios::app | ios::binary);
-    file.seekg(0, ios::beg);
+    int position1 = n % 10;
+    file.seekg(position1*sizeof(s2), ios::beg);
     while (file.read((char *)&s2, sizeof(s2)))
     {
         flag = 0;
@@ -243,7 +245,9 @@ void hashing::modify_hashTable()
     int position=0, i=0;
     char choice;
     fstream file("Data1.txt", ios::in | ios::out | ios::binary);
-    file.seekg(0, ios::beg);
+    int position1 = n % 10;
+    file.seekg(position1*sizeof(s1), ios::beg);
+    position = position1;
     while (file.read((char *)&s1, sizeof(s1)))
     {
         flag = 0;
@@ -274,7 +278,7 @@ int main()
     do
     {
         cout << "\n*****MENU*****\n1.Without Repeation\n2.Display\n";
-        cout << "3.Search\n4.With Repetation\n5.Modify\n6.Create more hash Table";
+        cout << "3.Search\n4.With Repetation\n5.Modify\n6.Create more hash Table(add set of 10 rows)";
         cout<<"\n7.Delete Id\n8.Exit\nchoice : ";
         cin >> choice;
         switch (choice)
