@@ -135,6 +135,7 @@ void tree::delete_nr()
 	}
 	if (flag == 1)
 	{
+		// For Root Node
 		if (curr == root)
 		{
 			if (curr->right == NULL)
@@ -159,6 +160,7 @@ void tree::delete_nr()
 		}
 		else if (curr != root)
 		{
+			//
 			if (curr->left == NULL)
 			{
 				if (parent->left == curr)

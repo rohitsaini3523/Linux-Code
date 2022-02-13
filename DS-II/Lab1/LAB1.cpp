@@ -217,10 +217,10 @@ void tree::create_nr()
 		cin >> curr->data;
 		curr->left = NULL;
 		curr->right = NULL;
-		cout << "Want to add node:(l for left  /r for right) ";
-		cin >> ch;
 		while (flag == 0)
 		{
+			cout << "Want to add node:(l for left  /r for right) ";
+			cin >> ch;
 			if (ch == 'l')
 			{
 				if (temp->left == NULL)
