@@ -70,7 +70,7 @@ public class lab6_1c {
     // }
 
     public static void main(String[] args) throws IOException {
-        BufferedWriter b2 = new BufferedWriter(new FileWriter("bankDetails.txt"));
+        // BufferedWriter b2 = new BufferedWriter(new FileWriter("bankDetails.txt"));
         Scanner sc = new Scanner(System.in);
         int id;
         String name;
@@ -103,7 +103,7 @@ public class lab6_1c {
                     break;
                 }
                 case 2:
-                    try {
+                   { try {
                         System.out.print("Enter Cid: ");
                         id = sc.nextInt();
                         System.out.print("Enter Withdraw Amount: ");
@@ -119,6 +119,8 @@ public class lab6_1c {
                     } catch (Exception e) {
                         System.out.println("Exception Occured! " + e);
                     }
+                    break;
+                }
             }
         } while (choice != 3);
         sc.close();

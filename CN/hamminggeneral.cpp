@@ -122,10 +122,11 @@ int main()
     cin >> d;
     int n = d.length();
     int k = calculatebits(n);
-    cout <<"\nNumber of Parity Bits are: " <<k;
+    cout <<"\nNumber of Parity Bits are: " <<k<<"\n";
     char data[n + k];
     int j = 0;
     int p = 1;
+    cout << "Bit Table and position: \n";
     for (int i = 0; i < n + k; i++)
     {
         if (i + 1 == pow(2, j))
