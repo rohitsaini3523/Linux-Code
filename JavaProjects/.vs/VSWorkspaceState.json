@@ -1,6 +1,10 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\p2",
+    "\\p2\\jdbc_example",
+    "\\p2\\jdbc_example\\src"
   ],
+  "SelectedNode": "\\p2\\jdbc_example\\src\\App.java",
   "PreviewInSolutionExplorer": false
 }
