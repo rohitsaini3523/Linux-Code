@@ -8,7 +8,7 @@ int Dividearray(int Data[], int low, int high)
     int i = (low - 1);
     int temp;
     int k = high - 1;
-    for (int j = low; j < k; j++)
+    for (int j = low; j <= k; j++)
     {
         if (Data[j] <= pivot)
         {
@@ -64,14 +64,13 @@ void QuickSortParallel(int Data[], int low, int high)
             }
         }
     }
-    //printArray(Data, high +1);
+    //  printArray(Data, high +1);
 }
 
 int main()
 {
     double start, stop;
     int n;
-    srand(time_t(0));
     printf("\nEnter the size of array: ");
     scanf("%d", &n);
     int Data[n], Data2[n];
@@ -88,10 +87,10 @@ int main()
     QuickSort(Data2, 0, n - 1);
     double stop_s = omp_get_wtime();
     // printf("Sorted Array : ");
-    //printArray(Data, n);
+    // printArray(Data, n);
     printf("\nTime(Serial): %lf\n", stop_s - start_s);
-    //printf("Sorted Array : ");
-    //printArray(Data, n);
+    // printf("Sorted Array : ");
+    // printArray(Data, n);
     /* FILE *f;
     f = fopen("Data.txt", "w");
     for (int i = 0; i < n; i++)

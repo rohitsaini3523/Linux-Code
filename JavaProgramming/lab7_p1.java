@@ -20,6 +20,7 @@ public class lab7_p1 {
         Thread t1 = new Thread(new oddno(k));
         System.out.println("Odd numbers till k : ");
         t1.start();
+        sc.close();
     }
 }
 

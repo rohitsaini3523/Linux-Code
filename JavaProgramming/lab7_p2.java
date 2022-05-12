@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class lab7_p2 {
     public static void main(String[] args) {
-        int g;
+        // int g;
         int q, w;
         Scanner sc = new Scanner(System.in);
         System.out.print("Enter Value 1: ");
@@ -34,7 +34,7 @@ public class lab7_p2 {
             System.out.println("Breaking mul");
         }
         t4.start();
-        
+        sc.close();
     }
 }
 
