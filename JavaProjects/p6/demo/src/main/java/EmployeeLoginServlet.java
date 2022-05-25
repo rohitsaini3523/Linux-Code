@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -34,7 +35,8 @@ public class EmployeeLoginServlet extends HttpServlet {
 		
 		if(username=="" || password=="") {
 			request.setAttribute("error", "You are missing one of the input");
-			doGet(request, response);
+			RequestDispatcher rd = request.getRequestDispatcher("empLogin.jsp");
+			rd.include(request, response);
 		} else
 			try {
 				if(Employee.check(username,password)) {
@@ -42,7 +44,8 @@ public class EmployeeLoginServlet extends HttpServlet {
 				}
 				else {
 					request.setAttribute("error", "Incorrect Username or Password");
-					doGet(request, response);
+					RequestDispatcher rd = request.getRequestDispatcher("empLogin.jsp");
+					rd.include(request, response);
 				}
 			} catch (ClassNotFoundException | SQLException | IOException | ServletException e) {
 				request.setAttribute("error", e.toString());

@@ -1,6 +1,8 @@
 
 import model.Admin;
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -28,14 +30,16 @@ public class AdminLoginServlet extends HttpServlet {
 		
 		if(username=="" || password=="") {
 			request.setAttribute("error", "You are missing one of the input");
-			doGet(request, response);
+			RequestDispatcher rd = request.getRequestDispatcher("admLogin.jsp");
+			rd.include(request, response);
 		}
 		else if(obj.check(username,password)) {
 			response.sendRedirect("/adminoptions");
 		}
 		else {
 			request.setAttribute("error", "Incorrect Username or Password");
-			doGet(request, response);
+			RequestDispatcher rd = request.getRequestDispatcher("admLogin.jsp");
+			rd.include(request, response);
 		}
 		
 	}
