@@ -45,20 +45,23 @@ string binary(string j)
     }
     return ip_ans;
 }
-string verify(string subnet,string maskbit, int index)
+string verify(string subnet, string maskbit, int index)
 {
-    if(maskbit[0] > 48)
+    if (maskbit[0] > 48)
     {
         for (int i = 0; i < subnet.length(); i++)
         {
-            if(subnet[i] =='0' && index == 1)
+            if (subnet[i] == '0' && index == 1)
             {
-                subnet.replace(i, i, "255.255.");
+                subnet = "255.";
+                subnet += maskbit;
+                subnet += ".0.0";
             }
             else if (subnet[i] == '0' && index == 2)
             {
-                subnet.replace(i, i, "255.");
-                subnet.append(maskbit);
+                subnet = "255.255.";
+                subnet += maskbit;
+                subnet += ".0";
             }
         }
     }
@@ -148,20 +151,52 @@ string last(int k, int j, int m) // subnet no and (cidr)
     // reverse(ans.begin(), ans.end());
     return ans;
 }
-void printtable(string networkaddress, int n, int k)
+void printtable(string networkaddress, int n, int k, int index)
 {
+
     cout << "Subnet\t\tSubnetAddress\t\tFirst-IPAddress\t\tLast-IPAddress\t\tBroadcast-IPAddress\n";
     int j = n;
-    for (int i = 0; i < n; i++)
+    int count = 0;
+    if (index == 3)
+        for (int i = 0; i < n; i++)
+        {
+            cout << i + 1 << "\t\t" << networkaddress + to_string(decimal(first(j - n - 1, k, i)));
+            cout << "\t\t" << networkaddress + to_string(decimal(first(j - n - 1, k, i)) + 1);
+            cout << "\t\t" << networkaddress + to_string(decimal(last(j - n - 1, k, i)) - 1);
+            cout << "\t\t" << networkaddress + to_string(decimal(last(j - n - 1, k, i))) << "\n";
+        }
+    else if (index == 2)
     {
-        cout << i + 1 << "\t\t" << networkaddress + to_string(decimal(first(j - n - 1, k, i)));
-        cout << "\t\t" << networkaddress + to_string(decimal(first(j - n - 1, k, i)) + 1);
-        cout << "\t\t" << networkaddress + to_string(decimal(last(j - n - 1, k, i)) - 1);
-        cout << "\t\t" << networkaddress + to_string(decimal(last(j - n - 1, k, i))) << "\n";
+        int pos = networkaddress.find(".");
+        pos++;
+        int newpos = networkaddress.find(".", pos);
+        newpos++;
+        for (int i = 0; i < n; i++)
+        {
+            cout << i + 1 << "\t\t" << networkaddress.substr(0, newpos) + to_string(decimal(first(j - n - 1, k, i))) + ".0";
+            cout << "\t\t" << networkaddress.substr(0, newpos) + to_string(decimal(first(j - n - 1, k, i)) + 1) + ".1";
+            cout << "\t\t" << networkaddress.substr(0, newpos) + to_string(decimal(last(j - n - 1, k, i))) + ".254";
+            cout << "\t\t" << networkaddress.substr(0, newpos) + to_string(decimal(last(j - n - 1, k, i))) + ".255"
+                 << "\n";
+        }
+    }
+    else if (index == 1)
+    {
+        int pos = networkaddress.find(".");
+        pos++;
+        for (int i = 0; i < n; i++)
+        {
+            cout << i + 1 << "\t\t" << networkaddress.substr(0, pos) + to_string(decimal(first(j - n - 1, k, i))) + ".0.0";
+            cout << "\t\t" << networkaddress.substr(0, pos) + to_string(decimal(first(j - n - 1, k, i)) + 1) + ".255.254";
+            cout << "\t\t" << networkaddress.substr(0, pos) + to_string(decimal(last(j - n - 1, k, i))) + ".255.254";
+            cout << "\t\t" << networkaddress.substr(0, pos) + to_string(decimal(last(j - n - 1, k, i))) + ".255.255"
+                 << "\n";
+        }
     }
 }
 int count(int k)
 {
+    // 255.255.255.224
     int ans = 0;
     int k1 = 8;
     while (k--)
@@ -232,6 +267,9 @@ int main()
         index = 3;
     }
     string subnetaddress;
+    int cidr = 8 * index;
+    cout << cidr << "\n";
+    cout << "Number of Host's per Subnet: " << (int(pow(2, (32 - (cidr))))/n - 2) << "\n";
     cout << "\nClass Id: " << class_id << "\n";
     string networkaddress = form(IpAddress, n);
     if (index == 1)
@@ -243,13 +281,18 @@ int main()
     int maskbit = count(k);
     subnetaddress = subnetaddress + to_string(maskbit);
     // cout << "\nSubnet Mask: " << subnetaddress << "\n";
-    subnetaddress = verify(subnetaddress, to_string(maskbit),index);
+    subnetaddress = verify(subnetaddress, to_string(maskbit), index);
     cout << "\nSubnet Mask: " << subnetaddress << "\n";
     string ip = convert(IpAddress);
     // cout << ip << "\n";
-    printtable(networkaddress, n, k);
-    // cout<< first(0)<<"\n";
-    // cout<< first(1);
+    if(n>128)
+    {
+        cout << "\nNot Possible Subnets!";
+    }
+    else
+    printtable(networkaddress, n, k, index);
+    //  cout<< first(0)<<"\n";
+    //  cout<< first(1);
 
     return 0;
 }
