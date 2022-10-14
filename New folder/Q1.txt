@@ -1,0 +1,7 @@
+Algorithm:
+1. Input Hour::min
+2. if(Hour > 12):
+    Hour = {Hour/2 + min/60}
+    else
+    Hour = {Hour + min/60}
+3. Calculate ans = Mode(min/5 - Hour) * 30

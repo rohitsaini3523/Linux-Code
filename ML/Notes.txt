@@ -1,0 +1,58 @@
+Data: Collection of raw facts
+Data Now: is Huge and Unstructured
+Data science Life cycle
+    1-> Data Acquisition
+    2-> Data Pre-processing
+    3-> Machine Learning Algorithm
+    4-> Pattern Evalution
+    5-> Knowledge Representation
+Data Acquisition:
+    Data form Multiple Source --> Data Storage --> Target Data
+Data Pre-processing
+    raw untiedy data to tiedy format data
+    1. Data Manipulation
+    2. Data Visualization
+Machine Learning: Application of intelligent algorithm to find meaningful information from the data
+    1. Classification
+    2. Regression
+    3. Clustering
+Model Evaluation(Pattern Evaluation)
+Knowledge Representation 
+    1. Aesthetic Graphs
+
+Introduction to Machine Learning
+    1. Supervised Learning
+    2. Unsupervised Learning
+
+Supervised Learning:
+    Input Variable:- x
+    Output Variable:- y | Y = f(x) to find out the relation between x and Y
+    Types: (requried Label data)
+    1. Regression:  Y(dependent variable) = f(x: independent variable)
+    2. Classification: estimate the relationship between different entities
+        independent Variable(input) and dependent variable(output)
+Unsupervised Learning:
+    Clustering: (No Label assosiated with data)
+    (raw image/Unkown)
+    this data is feed to unsupervised learning Model
+    1. Intracluster Similarity: (High Similarity)
+    2. Intercluster Dissimilarity
+    (Aim is To increase Intracluster Similarity and Intercluster Dissimilarity )
+Linear Regression (Y = a + bx)
+Measure of Good fit:- to find the residual(difference between observered and predicted)
+    Sum of residual should be minimum: (Yo - Yp)^2
+Multiple Linear Regression: More number of independent Variable
+
+Genreal Data: 
+    1. Import the Data
+    2. Clean the Data
+    3. Split the data into Traininh/Test Sets
+    4. create a Model
+    5. Train the Model
+    6. Make Predictions
+    7. Evaluate and Improve
+
+Decision Tree:
+    Classification and Regression (Both)
+    Decision take place at each nodes
+    
